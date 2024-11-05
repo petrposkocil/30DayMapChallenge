@@ -1,5 +1,5 @@
 // Create a map centered on Germany
-var map = L.map('map').setView([52.5200, 13.4050], 13); // Coordinates for Germany
+var map = L.map('map').setView([52.5200, 13.4050], 12); // Coordinates for Germany
 
 // Add OpenStreetMap tile layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -7,37 +7,43 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-var blackIcon = new L.Icon({
-    iconUrl: 'img/map-marker-black.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 25],
-    iconAnchor: [12, 25],
-    popupAnchor: [1, -25],
-    shadowSize: [41, 25]
-  });
+
+// GeoJSON data (trimmed for brevity, include your full GeoJSON object here)
+var geojsonData = {
+  "type": "FeatureCollection",
+  "name": "dog",
+  "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+  "features": [
+  { "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.283078396592691, 52.501424511940698 ], [ 13.282302855597417, 52.503725959414155 ], [ 13.282593683470646, 52.506145299922949 ], [ 13.284823363832063, 52.50868251398358 ], [ 13.286665273695844, 52.51157357937177 ], [ 13.286665273695844, 52.513697506222243 ], [ 13.28588973270057, 52.516411263368795 ], [ 13.284144765461196, 52.518829905649774 ], [ 13.283853937587971, 52.521189428345991 ], [ 13.283175339217104, 52.524020688307736 ], [ 13.283078396592691, 52.526438911691855 ], [ 13.284241708085606, 52.527972350222257 ], [ 13.28588973270057, 52.528739049411051 ], [ 13.288216355686398, 52.528974954161107 ], [ 13.299946413239951, 52.530213433309925 ], [ 13.309059019934445, 52.531451877533755 ], [ 13.317396085633662, 52.532513373357091 ], [ 13.32224321685414, 52.533162052617747 ], [ 13.329029200562804, 52.53410556898222 ], [ 13.332713020290367, 52.534518351016693 ], [ 13.338335692506121, 52.534990097161717 ], [ 13.345412504088015, 52.536228406678681 ], [ 13.350453520557311, 52.536641168756987 ], [ 13.353846512411645, 52.536935996437201 ], [ 13.355300651777787, 52.537584610364981 ], [ 13.357433389514794, 52.538410105142162 ], [ 13.359178356754168, 52.539117659740604 ], [ 13.360923323993539, 52.539766241438478 ], [ 13.363153004354958, 52.540945456340985 ], [ 13.367224594580156, 52.542478388360443 ], [ 13.369938988063625, 52.543893355020721 ], [ 13.373138094669139, 52.545190367725098 ], [ 13.376240258650244, 52.546605246965889 ], [ 13.379051594758117, 52.547548474454572 ], [ 13.381378217743945, 52.54790217953677 ], [ 13.387097832584111, 52.548727480309879 ], [ 13.390587767062849, 52.549140124876587 ], [ 13.394950185161278, 52.549316971360298 ], [ 13.399506488508528, 52.549552765563419 ], [ 13.404838332851048, 52.549788558499657 ], [ 13.407940496832154, 52.549906454492685 ], [ 13.409976291944757, 52.549906454492685 ], [ 13.415792849409327, 52.549611713916264 ], [ 13.419476669136888, 52.548137981341284 ], [ 13.42277271836681, 52.546428389555082 ], [ 13.424323800357365, 52.545249321937426 ], [ 13.427038193840829, 52.544306045038354 ], [ 13.428977046329024, 52.543598574061129 ], [ 13.431109784066033, 52.542773176842637 ], [ 13.432273095558946, 52.542419430426463 ], [ 13.434018062798318, 52.541829846731225 ], [ 13.436344685784142, 52.541063376089106 ], [ 13.439349907140839, 52.539943125693121 ], [ 13.441191817004619, 52.538940772160025 ], [ 13.446135890849504, 52.536877031059532 ], [ 13.449141112206201, 52.535815640720038 ], [ 13.450886079445572, 52.532985141042438 ], [ 13.453406587680218, 52.530803173010312 ], [ 13.454957669670772, 52.529387784424628 ], [ 13.456508751661325, 52.527382572507861 ], [ 13.459126202520384, 52.525495230601166 ], [ 13.461452825506212, 52.524669493015182 ], [ 13.462906964872355, 52.524315600726375 ], [ 13.464942759984954, 52.523725773909085 ], [ 13.468432694463697, 52.522664065679564 ], [ 13.470080719078657, 52.521602331789083 ], [ 13.472504284688895, 52.518711926188473 ], [ 13.47318288305976, 52.517650096779782 ], [ 13.474055366679449, 52.515644348991003 ], [ 13.475412563421182, 52.512753551406441 ], [ 13.476285047040866, 52.510570578231132 ], [ 13.47327982568417, 52.507620442199482 ], [ 13.472213456815668, 52.506499338584426 ], [ 13.470565432200706, 52.504670108138413 ], [ 13.469692948581022, 52.503548929270742 ], [ 13.469208235458973, 52.501896613552859 ], [ 13.468529637088107, 52.500185221087307 ], [ 13.467754096092827, 52.498414744981133 ], [ 13.465912186229051, 52.496821255526946 ], [ 13.463779448492039, 52.495227708321508 ], [ 13.461840596003849, 52.493338984997074 ], [ 13.460386456637709, 52.491450180548966 ], [ 13.459223145144794, 52.489679352700783 ], [ 13.458447604149514, 52.487554265163489 ], [ 13.457575120529832, 52.483126669677603 ], [ 13.457865948403056, 52.479584272408616 ], [ 13.456411809036915, 52.474329191105625 ], [ 13.455248497544, 52.471730941538951 ], [ 13.450886079445572, 52.47013648517332 ], [ 13.409394636198297, 52.464762151239938 ], [ 13.404935275475458, 52.464644026641125 ], [ 13.401930054118766, 52.465352769479487 ], [ 13.397470693395926, 52.466297742180224 ], [ 13.393980758917186, 52.468010453494799 ], [ 13.388842799823477, 52.469959319789176 ], [ 13.383220127607727, 52.471435676199725 ], [ 13.379342422631348, 52.471789994369054 ], [ 13.369648160190394, 52.47220336196127 ], [ 13.366739881458107, 52.473738693310771 ], [ 13.364994914218739, 52.476513964050774 ], [ 13.363443832228185, 52.478108189362544 ], [ 13.360438610871489, 52.47905288821682 ], [ 13.357239504265978, 52.479938524971061 ], [ 13.354428168158101, 52.48005660852467 ], [ 13.35064740580613, 52.479466187587299 ], [ 13.347739127073845, 52.479111931221738 ], [ 13.345703331961243, 52.477990100579582 ], [ 13.337172381013204, 52.478108189362544 ], [ 13.320692134863588, 52.477872011479626 ], [ 13.310125388802946, 52.481650705479169 ], [ 13.283078396592691, 52.501424511940698 ] ] } },
+  { "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.361886691323624, 52.534547835299229 ], [ 13.370417642271663, 52.538321660015583 ], [ 13.381081330956714, 52.540326372466637 ], [ 13.390000052402392, 52.538321660015583 ], [ 13.394459413125231, 52.533368448554818 ], [ 13.40066374108744, 52.529476247547649 ], [ 13.395234954120506, 52.528178770551264 ], [ 13.380111904712617, 52.528768537574095 ], [ 13.373132035755129, 52.52983009825784 ], [ 13.366539937295279, 52.53218903013336 ], [ 13.362201754852958, 52.534223507102304 ] ] } },
+  { "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.427038193840829, 52.544306045038347 ], [ 13.42317866560656, 52.534061342105488 ], [ 13.413872173663245, 52.516485004430464 ], [ 13.413678288414427, 52.505510973522846 ], [ 13.424535862348295, 52.490756614802741 ], [ 13.432097387052238, 52.487923211337574 ], [ 13.443148846234925, 52.486742572686786 ], [ 13.448771518450682, 52.488159335264875 ], [ 13.453230879173523, 52.498075395585303 ], [ 13.456914698901082, 52.512001322895244 ], [ 13.464942759984954, 52.523725773909085 ] ] } },
+  { "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.288798011432856, 52.497175369285337 ], [ 13.315378467263141, 52.497603252938426 ], [ 13.342522402097813, 52.499727854923272 ], [ 13.360165959740355, 52.504212788632479 ], [ 13.368503025439576, 52.504094769923093 ], [ 13.378197287880528, 52.497603252938426 ], [ 13.348920615308845, 52.489339935887067 ], [ 13.310125388802946, 52.481650705479169 ] ] } },
+  { "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.378197287880528, 52.497603252938426 ], [ 13.360165959740355, 52.497485216484492 ], [ 13.345042910332465, 52.496068754321016 ], [ 13.329725975675753, 52.494062021478015 ], [ 13.317705090248969, 52.492173248085258 ], [ 13.311694647535578, 52.490520504819123 ], [ 13.309755795047389, 52.487805148898588 ], [ 13.311888532784396, 52.485916106775157 ], [ 13.318868401741884, 52.484853484928287 ], [ 13.348920615308845, 52.489339935887067 ] ] } },
+  { "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.299946413239951, 52.530213433309925 ], [ 13.300303889167457, 52.52217744083179 ], [ 13.299382934235568, 52.520643799986559 ], [ 13.298704335864704, 52.519257578541307 ], [ 13.294002618580839, 52.517930304255053 ], [ 13.289010073423748, 52.517340391701651 ], [ 13.28588973270057, 52.516411263368795 ] ] } },
+  { "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.286344151252482, 52.522678811802933 ], [ 13.290658098038707, 52.522944241176894 ], [ 13.294390389078472, 52.522590334988536 ], [ 13.294632745639495, 52.52135164087575 ], [ 13.292887778400127, 52.520142405789557 ], [ 13.288573831613899, 52.519493534216636 ], [ 13.286150266003661, 52.520142405789557 ], [ 13.285714024193821, 52.520968228476484 ], [ 13.286053323379251, 52.522324903476132 ] ] } },
+  { "type": "Feature", "properties": { }, "geometry": { "type": "LineString", "coordinates": [ [ 13.288798011432856, 52.497175369285337 ], [ 13.283817584103817, 52.500775363945863 ], [ 13.283078396592691, 52.501424511940698 ] ] } }
+  ]
+};
+  
+
+// Loop through the features in the GeoJSON
+geojsonData.features.forEach(function(feature, index) {
+  if (feature.geometry.type === "LineString") {
+      // Extract coordinates and convert them to [latitude, longitude]
+      var latlngs = feature.geometry.coordinates.map(function(coord) {
+          return [coord[1], coord[0]]; // Switch to [lat, lng]
+      });
+
+      // Determine the color based on the index
+      var color = index === 0 ? 'red' : 'black'; // First iteration red, rest black
+      var opac = index === 0 ? 1 : 0.6; // 
 
 
-
-var marker1 = L.marker([52.517933, 13.4580095], {icon: blackIcon}).addTo(map).bindPopup("<strong>Rigaer Straße 94:</strong> Occupied in 1990, known for the Kadterschmiede bar with no rental contract, it symbolizes the leftist movement despite its legal status.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/06/imago0086233775h-940x591.jpg' alt='Rigaer Straße 94' style='width: 100%; height: auto;'>");
-
-var marker2 = L.marker([52.5179737, 13.4574162], {icon: blackIcon}).addTo(map).bindPopup("<strong>Liebigstraße 14:</strong> Occupied since 1990, initial rental agreements escalated into eviction proceedings in 2011 after protests, facing hostility from new tenants post-renovation.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/06/imago0058877918h-940x626.jpg' alt='Liebigstraße 14' style='width: 100%; height: auto;'>");
-
-var marker3 = L.marker([52.5180149, 13.4570508], {icon: blackIcon}).addTo(map).bindPopup("<strong>Liebigstraße 34:</strong> Occupied until 2020, it faced numerous police operations and protests, culminating in a significant eviction involving over 1,500 officers.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/10/imago0105504239h.jpg' alt='Liebigstraße 34' style='width: 100%; height: auto;'>");
-
-var marker4 = L.marker([52.531539, 13.3995152], {icon: blackIcon}).addTo(map).bindPopup("<strong>Brunnenstraße 183:</strong> Occupied in the early 1990s, initially legalized but later evicted after lengthy court battles, now displays ‘Studio 183’.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/06/imago0052769551h-2048x1256.jpg' alt='Brunnenstraße 183' style='width: 100%; height: auto;'>");
-
-var marker5 = L.marker([52.510189, 13.4196062], {icon: blackIcon}).addTo(map).bindPopup("<strong>Köpi:</strong> A famous squat at Köpenicker Straße 137, known for hosting leftist bands and providing free housing, despite facing evictions and ownership changes.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/06/imago0052226935h-940x628.jpg' alt='Köpi' style='width: 100%; height: auto;'>");
-
-var marker6 = L.marker([52.5288992, 13.4028556], {icon: blackIcon}).addTo(map).bindPopup("<strong>Linienstraße 206:</strong> Occupied since 1990, its grey façade contrasts with the area's affluence, embodying a political statement against gentrification.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/06/imago0056178089h-940x615.jpg' alt='Linienstraße 206' style='width: 100%; height: auto;'>");
-
-var marker7 = L.marker([52.5256864, 13.389102], {icon: blackIcon}).addTo(map).bindPopup("<strong>Tacheles:</strong> Occupied in early 1990, it became a cultural hub with various facilities but was evacuated in 2012, leading to extensive construction on the site.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/06/imago0050655403h-940x611.jpg' alt='Tacheles' style='width: 100%; height: auto;'>");
-
-var marker8 = L.marker([52.5131994, 13.4622662], {icon: blackIcon}).addTo(map).bindPopup("<strong>Mainzer Straße:</strong> Once synonymous with East Berlin squats post-reunification, this area saw numerous occupations that were quickly cleared, leaving historical traces.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/06/imago0050533241h-940x607.jpg' alt='Mainzer Straße' style='width: 100%; height: auto;'>");
-
-var marker9 = L.marker([52.5166071, 13.3234066], {icon: blackIcon}).addTo(map).bindPopup("<strong>Marchstraße 23:</strong> An alternative housing project that existed from 1989 to 1996, recognized as potentially the last occupied house in the West.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/06/imago0064530492h-940x627.jpg' alt='Marchstraße 23' style='width: 100%; height: auto;'>");
-
-var marker10 = L.marker([52.5048801, 13.3848363], {icon: blackIcon}).addTo(map).bindPopup("<strong>KuKuCK:</strong> Occupied in 1981, it hosted cultural events and political discussions but was evacuated in 1984, now part of a hotel complex.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/06/imago0081145022h-940x615.jpg' alt='KuKuCK' style='width: 100%; height: auto;'>");
-
-var marker11 = L.marker([52.501387, 13.3890261], {icon: blackIcon}).addTo(map).bindPopup("<strong>Tommy-Weisbecker-Haus:</strong> Since 1973, it has been a pivotal squat that hosts concerts and bars, named after a militant leftist, with a rich history of resistance.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/06/imago0091949231h-940x627.jpg' alt='Tommy-Weisbecker-Haus' style='width: 100%; height: auto;'>");
-
-var marker12 = L.marker([52.5035914, 13.425348], {icon: blackIcon}).addTo(map).bindPopup("<strong>Georg-von-Rauch-Haus:</strong> Occupied in 1971, it established ‘Jugendzentrum Kreuzberg e.V.’ and remains standing, celebrating its 50th anniversary in 2021.<br><img src='https://www.tip-berlin.de/wp-content/uploads/2020/06/imago0056790164h-940x625.jpg' alt='Georg-von-Rauch-Haus' style='width: 100%; height: auto;'>");
+      // Create a polyline with the specified color
+      var polyline = L.polyline(latlngs, {
+          color: color, // Set color based on the index
+          weight: 5,    // Set line thickness (adjust as needed)
+          opacity: opac    // Set opacity to fully opaque
+      }).addTo(map);
+  }
+});
