@@ -1,6 +1,6 @@
 {
 "type": "FeatureCollection",
-"name": "S_Bahn_Ring",
+"name": "S_Bahn_Ring_4326",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::25833" } },
 "features": [
 { "type": "Feature", "properties": { "id": 398529, "typ": "sbhahnring" }, "geometry": { "type": "LineString", "coordinates": [ [ 391774.323103410017211, 5823341.426512139849365 ], [ 391593.48370804998558, 5823340.27326846960932 ], [ 391441.709084720001556, 5823338.057580539956689 ], [ 391292.704071299987845, 5823330.856594759970903 ], [ 391196.043, 5823324.770999999716878 ] ] } },
