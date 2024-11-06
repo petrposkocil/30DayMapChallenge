@@ -1,5 +1,5 @@
 // Create a map centered on Germany
-var map = L.map('map').setView([52.5200, 13.4050], 12); // Coordinates for Germany
+var map = L.map('map').setView([52.5200, 13.4050], 10); // Coordinates for Germany
 
 // Add OpenStreetMap tile layer
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -7,23 +7,26 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-// Color scale for population density (for example, using d3-scale)
-var colorScale = d3.scaleSequential(d3.interpolateYlGnBu)
-.domain([0, 10000]); // Set the domain based on your data (min and max of population_density)
+//Legend
+const legendTitle = 'Rent Difference between 2008 and 2022 [EUR/m²]';
 
 // Example of recalculated breakpoints
-const breakpoints = [0.96, 2.6, 4.310, 6.310, 8.490, 12.100]; // Rent difference ranges
-const colors = ['#fff5f0', '#fdbea5', '#fc7050', '#d42020', '#67000d']; // Corresponding colors
+const breakpoints = [0, 0.96, 2.6, 4.310, 6.310, 8.490, 12.100]; // Rent difference ranges
+const colors = ['','#fff5f0', '#fdbea5', '#fc7050', '#d42020', '#67000d']; // Corresponding colors
 
 // Function to determine the color based on the breakpoints
 function getColor(rentDiff) {
+  if (rentDiff === -999) {
+    return 'rgba(0, 0, 0, 0)'; // Fully transparent color
+  }
+  
   for (let i = 0; i < breakpoints.length - 1; i++) {
       if (rentDiff >= breakpoints[i] && rentDiff < breakpoints[i + 1]) {
           return colors[i];
       }
   }
   return colors[colors.length - 1]; // Return last color if rentDiff exceeds all breakpoints
-}
+};
 
 // Function to style polygons based on rent_diff (with the new breakpoints and colors)
 function style(feature) {
@@ -33,11 +36,34 @@ function style(feature) {
       weight: 2,
       opacity: 1,
       color: 'black', // Border color
-      fillOpacity: 0.7 // Transparency of fill color
+      fillOpacity: 0.6 // Transparency of fill color
   };
-}
+};
 
-// Fetch GeoJSON data from GitHub
+// Function to create a legend for the map
+function createLegend() {
+  var legend = L.control({ position: 'topright' });
+
+  legend.onAdd = function() {
+      var div = L.DomUtil.create('div', 'legend');
+      div.innerHTML += '<strong>' + legendTitle + '</strong><br>'; // Use the variable for the legend title
+
+      // Add no data to the legend
+      div.innerHTML += '<i style="background: rgba(0, 0, 0, 0)"></i>NA<br>';
+
+      // Loop through the breakpoints and create a color swatch for each
+      for (let i = 0; i < breakpoints.length - 1; i++) {
+          div.innerHTML +=
+              '<i style="background:' + colors[i] + '"></i> ' +
+              breakpoints[i] + ' - ' + breakpoints[i + 1] + '<br>';
+      }
+      return div;
+  };
+
+  legend.addTo(map);
+};
+
+// Fetch GeoJSON data from GitHub (Polygons)
 fetch('https://raw.githubusercontent.com/petrposkocil/30DayMapChallenge/main/data/map_3/rent_prices_per_city_quarter_4326.geojson')
     .then(response => response.json())
     .then(data => {
@@ -46,22 +72,21 @@ fetch('https://raw.githubusercontent.com/petrposkocil/30DayMapChallenge/main/dat
     })
     .catch(error => console.error('Error loading GeoJSON:', error));
 
-// // Fetch GeoJSON data from GitHub
-// fetch('https://raw.githubusercontent.com/petrposkocil/30DayMapChallenge/main/data/map_3/rent_prices_per_city_quarter_4326.geojson')
-//   .then(response => response.json())
-//   .then(data => {
-//     // Function to style polygons based on population_density
-//     function style(feature) {
-//       return {
-//         fillColor: colorScale(feature.properties.rent_diff),
-//         weight: 2,
-//         opacity: 1,
-//         color: 'black',
-//         fillOpacity: 0.6
-//       };
-//     }
+// Style for LineString features (simple uniform color)
+const lineStyle = {
+  color: "#FF5733", // Choose any color you prefer for the lines
+  weight: 2,        // Line thickness
+  opacity: 1      // Line opacity
+};
 
-//     // Add GeoJSON layer with custom style
-//     L.geoJSON(data, { style: style }).addTo(map);
-// })
-// .catch(error => console.error('Error loading GeoJSON:', error));
+// Fetch the GeoJSON file containing multiple LineString features
+fetch('https://raw.githubusercontent.com/petrposkocil/30DayMapChallenge/main/data/map_3/road_lines.geojson')
+    .then(response => response.json())
+    .then(lineData => {
+        // Add GeoJSON layer with custom line style to the map
+        L.geoJSON(lineData, { style: lineStyle }).addTo(map);
+    })
+    .catch(error => console.error('Error loading line GeoJSON:', error));
+
+// Create the legend and add it to the map
+createLegend();
