@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title"><h1 style="text-align: center;">: Berlin’s Unique Shape: A Dog's Head from Above :</h1></title>
 
+    <title>Berlin’s Unique Shape</title>
+    
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
 
     <!-- CSS FILES -->
@@ -21,6 +21,8 @@
 
     <link href="css/bootstrap-icons.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+
     <link href="css/magnific-popup.css" rel="stylesheet">
 
     <link href="css/portfolio-style.css" rel="stylesheet">
@@ -29,38 +31,99 @@
 
     <style>
         #map{
-        height: 100%;
-        width: 100%;
-        min-height: 800px;
+            height: 100%;
+            width: 100%;
+            min-height: 800px;
+        }
+
+        .main-map {
+            padding-top: 8%;
         }
     </style>
 </head>
 <body>
-    <div class="container-lg">
-        <div class="row">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
 
-            <div class="col-lg-12 col-md-12 p-1">
-                
-                <p>
-                    A fun fact about Berlin is that its layout resembles a dog’s head when viewed from above. 
-                    The shape is created by the winding River Spree, which outlines the "head," while various neighborhoods and parks form the ears and eyes.
-                    The <strong>Ringbahn</strong>, a circular railway line that encircles much of the inner city, naturally creates the whole outer shape.  
-                    This interesting resemblance adds a quirky layer to the city’s character and reflects its unique urban planning.                    
-                </p>
-                
-                <p>
-                    See this <strong>exaggerated</strong> fun fact for yourself.
-                </p>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            </div>
+            <a href="index.html" class="navbar-brand mx-auto d-lg-none">
+                <img src="img/logo_centered.png" class="home-logo-image" alt="">
+            </a>
 
-            <div class="col-lg-12 col-12">
-                <div id="map"></div>
-                <h3>#30DayMapChallenge  #2 Lines</h3>
+            <div class="d-flex align-items-center d-lg-none"></div>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ms-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="index.html">Back to the list</a>
+                    </li>
+                </ul>
+
+                <a href="index.html" class="navbar-brand d-lg-flex align-items-center justify-content-center d-none ms-auto">
+                    <span style="display: inline-block;" class="flip-h">&nbsp;Petr</span>
+                    <img src="img/logo_centered.png" class="home-logo-image" alt="">&nbsp;Poskocil
+                </a>
+
+                <div class="d-lg-flex align-items-center ms-auto">
+                      <a target="_blank" href="https://www.linkedin.com/in/petr-posko%C4%8Dil-6666b11aa/" class="social-icon-link bi-linkedin"></a>&nbsp;
+                      <a target="_blank" href="https://github.com/petrposkocil" class="social-icon-link bi-github"></a>&nbsp;
+                      <a target="_blank" href="https://twitter.com/PPoskocil" class="social-icon-link bi-twitter"></a>&nbsp;
+                      <a target="_blank" href="mailto:petr.poskocil@gmail.com" class="social-icon-link bi-envelope"></a>
+                </div>
             </div>
 
         </div>
-    </div>
+    </nav>
+
+    <main class="main-map">
+    
+        <h1 style="text-align: center;">: Berlin’s Unique Shape: A Dog's Head from Above :</h1>
+        
+        <div class="container-lg">
+            <div class="row">
+
+                <div class="col-lg-12 col-md-12 p-1">
+                    
+                    <p>
+                        A fun fact about Berlin is that its layout resembles a dog’s head when viewed from above. 
+                        The shape is created by the winding River Spree, which outlines the "head," while various neighborhoods and parks form the ears and eyes.
+                        The <strong>Ringbahn</strong>, a circular railway line that encircles much of the inner city, naturally creates the whole outer shape.  
+                        This interesting resemblance adds a quirky layer to the city’s character and reflects its unique urban planning.                    
+                    </p>
+                    
+                    <p>
+                        See this <strong>exaggerated</strong> fun fact for yourself.
+                    </p>
+
+                </div>
+
+                <div class="col-lg-12 col-12">
+                    <div id="map"></div>
+                    <h3>#30DayMapChallenge  #2 Lines</h3>
+                </div>
+
+            </div>
+        </div>
+        
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <div class="copyright-text-wrap">
+                        <p class="mb-0">
+                            <span class="copyright-text">Copyright © <script>document.write(new Date().getFullYear())</script> <a href="#">Petr Poskocil</a></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="js/map_2.js"></script>
