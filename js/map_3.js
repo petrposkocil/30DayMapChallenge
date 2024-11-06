@@ -14,6 +14,12 @@ const legendTitle = 'Rent Difference between 2008 and 2022 [EUR/m²]';
 const breakpoints = [0, 0.96, 2.6, 4.310, 6.310, 8.490, 12.100]; // Rent difference ranges
 const colors = ['','#fff5f0', '#fdbea5', '#fc7050', '#d42020', '#67000d']; // Corresponding colors
 
+// Layer groups for toggling
+let polygonLayer;  // To store the polygon layer
+
+// Create a layer control object
+const overlayMaps = {};  // Empty at first, will be populated later
+
 // Function to determine the color based on the breakpoints
 function getColor(rentDiff) {
   if (rentDiff === -999) {
@@ -57,6 +63,10 @@ function createLegend() {
               '<i style="background:' + colors[i] + '"></i> ' +
               breakpoints[i] + ' - ' + breakpoints[i + 1] + '<br>';
       }
+
+      // Add entry for the line
+      div.innerHTML += '<br><i style="background: none; border: 2px dashed #FFEA00; display: inline-block; width: 20px; height: 1px;"></i> Ring-Bahn (Train)<br>';
+
       return div;
   };
 
@@ -68,19 +78,34 @@ fetch('https://raw.githubusercontent.com/petrposkocil/30DayMapChallenge/main/dat
     .then(response => response.json())
     .then(data => {
         // Add GeoJSON layer with custom style
-        L.geoJSON(data, { style: style }).addTo(map);
+        // L.geoJSON(data, { style: style }).addTo(map);
+
+        polygonLayer = L.geoJSON(data, { style: style });
+        polygonLayer.addTo(map);  // Add polygon layer initially visible
+        overlayMaps["Polygon Layer"] = polygonLayer;  // Add to overlayMaps for toggling
+
+        // Now add the layer control with the polygon layer available
+        L.control.layers(null, overlayMaps, { collapsed: false, position: 'bottomright' }).addTo(map);
+
+
     })
     .catch(error => console.error('Error loading GeoJSON:', error));
 
+// Create a custom pane for lines with a high z-index
+map.createPane('topLines');
+map.getPane('topLines').style.zIndex = 800; // Higher than the default overlay pane
+
 // Style for LineString features (simple uniform color)
 const lineStyle = {
-  color: "#FF5733", // Choose any color you prefer for the lines
-  weight: 2,        // Line thickness
-  opacity: 1      // Line opacity
+  pane: 'topLines',
+  color: "#FFEA00",     // Line color
+  weight: 2,            // Line thickness
+  opacity: 1,         // Line opacity
+  dashArray: "5, 5"     // Dashed pattern (5px line, 5px gap)
 };
 
 // Fetch the GeoJSON file containing multiple LineString features
-fetch('https://raw.githubusercontent.com/petrposkocil/30DayMapChallenge/main/data/map_3/road_lines.geojson')
+fetch('https://raw.githubusercontent.com/petrposkocil/30DayMapChallenge/main/data/map_3/S_Bahn_Ring_4326.geojson')
     .then(response => response.json())
     .then(lineData => {
         // Add GeoJSON layer with custom line style to the map
