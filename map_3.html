@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Squats in Berlin</title>
 
+    <title>Berlin Rent Price Changes (2008–2022)</title>
+    
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
 
     <!-- CSS FILES -->
@@ -42,7 +42,6 @@
     </style>
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg">
         <div class="container">
 
@@ -80,38 +79,40 @@
         </div>
     </nav>
 
-    <main  class="main-map">
+    <main class="main-map">
     
-        <h1 style="text-align: center;">: Squats in Berlin :</h1>
-
+        <h1 style="text-align: center;">: Berlin Rent Price Changes (2008–2022) :</h1>
+        
         <div class="container-lg">
             <div class="row">
 
                 <div class="col-lg-12 col-md-12 p-1">
                     
                     <p>
-                        Berlin’s squats represent a significant piece of the city’s cultural and political history. 
-                        Following the eviction of Liebigstraße 34, public attention returned to the city’s last few remaining occupied houses. 
-                        These squats have long been symbols of resistance against gentrification and strongholds for left-wing activism. 
-                        The squatter movement began in the 1970s, especially in Kreuzberg, where activists preserved old, vacant buildings that were slated for demolition. 
-                        After the fall of the Berlin Wall, squatting expanded eastward, with new scenes forming in areas like Mitte, Friedrichshain, and Prenzlauer Berg. 
-                        Today, Berlin’s most notable squats offer a glimpse into the city’s rich, rebellious history and social movements 
-                        [<a href="https://www.tip-berlin.de/english/squats-in-berlin-the-most-famous-occupied-houses/">Source: Jacek Slaski, "Squats in Berlin: The Most Famous Occupied Houses," published on October 12, 2020. Available at: Tip Berlin</a>] 
+                        This map visualizes the changes in rent prices across Berlin's city quarters between <strong>2008</strong> and <strong>2022</strong>, 
+                        focusing on the net <strong>cold rent per square meter (EUR/m²)</strong> [<a href="https://fbinter.stadt-berlin.de/fb/index.jsp">1</a>]. By comparing the rental data from these two years, 
+                        the map highlights areas that have experienced the most significant rent hikes and those with the least change. 
+                        The data is categorized using the Natural Breaks (Jenks) classification method, 
+                        which optimally groups the values based on the distribution of the data, 
+                        allowing for a clear understanding of rent trends in different neighborhoods. 
+                        The analysis provides insights into how rent prices have evolved over time, 
+                        shedding light on areas with rapid gentrification as well as those with relatively stable rents.
                     </p>
                     
                     <p>
-                        For a deeper understanding of this vibrant legacy, explore the twelve famous squats visualized on the accompanying map.
+                        This should give your map viewers a solid understanding of the purpose and methodology behind your analysis.
                     </p>
 
                 </div>
 
                 <div class="col-lg-12 col-12">
                     <div id="map"></div>
-                    <h3>#30DayMapChallenge  #1 Points</h3>
+                    <h3>#30DayMapChallenge  #3 Polygons</h3>
                 </div>
 
             </div>
         </div>
+        
     </main>
 
     <footer class="site-footer">
@@ -129,6 +130,7 @@
     </footer>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="js/map_1.js"></script>
+    <script src="https://unpkg.com/d3-scale-chromatic"></script>
+    <script src="js/map_3.js"></script>
 </body>
 </html>
